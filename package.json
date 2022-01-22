@@ -4,7 +4,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "repository": "git@github.com:marklawrence97/wordle.git",
-  "author": "<mark.lawrence@tandem.co.uk>",
+  "author": "Mark Lawrence",
   "license": "MIT",
   "devDependencies": {
     "ts-loader": "^9.2.6",

@@ -1,7 +1,10 @@
+export const WORD_LENGTH = 5
+export const GUESSES = 6
+export const TOAST_ID = 'toast'
 export interface AppState {
     target: string;
     currentWord: string
-    currentGuess: number
+    guesses: string[]
 }
 
 export interface Colors {
@@ -11,3 +14,4 @@ export interface Colors {
     error: string;
     warning: string;
 }
+
