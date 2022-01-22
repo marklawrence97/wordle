@@ -1,52 +1,58 @@
-import { pickRandomElement } from './utils/random'
-import { FIVE_LETTER_TARGET_WORDS} from './words/words'
-import { AppState } from './model'
-import { backspace, submit, updateWord } from './state/update'
+import { pickRandomElement } from "./utils/random";
+import { FIVE_LETTER_TARGET_WORDS } from "./words/words";
+import { AppState } from "./model";
+import { backspace, submit, updateWord } from "./state/update";
 
-import { createBoard } from './components/board'
-import { createKeyboard } from './components/keyboard'
-import { createHeader } from './components/header'
-import { isGameOver } from './state/select'
+import { createBoard } from "./components/board";
+import { createKeyboard } from "./components/keyboard";
+import { createHeader } from "./components/header";
+import { isGameOver } from "./state/select";
+import { createLeaderBoard, overlay } from "./components/modal";
 
 const state: AppState = {
-    target: pickRandomElement(FIVE_LETTER_TARGET_WORDS),
-    currentWord: '',
-    guesses: []
-}
-
+  target: pickRandomElement(FIVE_LETTER_TARGET_WORDS),
+  currentWord: "",
+  guesses: [],
+};
 
 const createApp = () => {
-    const root = document.getElementById("root")
-    root.style.cssText = `
+  const root = document.getElementById("root");
+  root.style.cssText = `
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-    `
-    createHeader(root)
-    createBoard(root)
-    createKeyboard(root, state)
+    `;
+  createHeader(root);
+  createBoard(root);
+  createKeyboard(root, state);
 
-    document.addEventListener("keydown", (e) => {
-        if (isGameOver(state)) return;
+  const modal = createLeaderBoard();
+  overlay(root, modal, isGameOver(state));
 
-        if (e.code === "Backspace" && state.currentWord.length) {
-            backspace(state)
-        }
-    })
+  document.addEventListener("keydown", (e) => {
+    if (isGameOver(state)) return;
 
-    document.addEventListener("keypress", (e) => {
-        if (isGameOver(state)) return;
+    if (e.code === "Backspace" && state.currentWord.length) {
+      backspace(state);
+    }
+  });
 
-        const [code, letter] = e.code.split("Key")
-    
-        if (code === "Enter") {
-            submit(state)
-        }
-    
-        if (letter) {
-            updateWord(state, letter)
-        }
-    })
-}
+  document.addEventListener("keypress", (e) => {
+    if (isGameOver(state)) return;
 
-createApp()
+    const [code, letter] = e.code.split("Key");
+
+    if (code === "Enter") {
+      submit(state);
+      setTimeout(() => {
+        overlay(root, modal, isGameOver(state));
+      }, 1000);
+    }
+
+    if (letter) {
+      updateWord(state, letter);
+    }
+  });
+};
+
+createApp();
