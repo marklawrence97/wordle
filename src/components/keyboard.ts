@@ -19,13 +19,13 @@ export function createKeyboard(root: HTMLElement, state: AppState) {
     const key = document.createElement("button");
     key.onclick = onPress;
     key.style.cssText = `
-            background-color: ${styles.colors.primaryBackground};
+            background-color: ${styles.colors.cloud};
             padding: 1rem;
             border-radius: 4px;
+            border: 0;
             margin: 0.1rem;
             font-weight: bold;
             font-size: 1rem;
-            border: 1px solid black;
         `;
     key.innerText = letter;
     key.id = `key:${letter}`;

@@ -9,20 +9,6 @@ export function createBoard(root: HTMLElement) {
         align-items: center;
     `;
 
-  const toast = document.createElement("div");
-  toast.id = TOAST_ID;
-  toast.style.cssText = `
-        background-color: ${styles.colors.primaryBackground};
-        color: ${styles.colors.primaryBackground};
-        align-self: center;
-        padding: 16px;
-        border-radius: 4px;
-        margin-bottom: 24px;
-    `;
-  toast.innerText = "Placeholder";
-
-  grid.appendChild(toast);
-
   for (let i = 0; i < GUESSES; i++) {
     const row = document.createElement("div");
     row.style.cssText = `

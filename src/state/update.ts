@@ -5,7 +5,7 @@ import {
   FIVE_LETTER_VALID_GUESSES,
 } from "../words/words";
 import { styles } from "../theme/style";
-import { fadeOut } from "../utils/animation";
+import { feedback } from "../components/toast";
 
 export function updateWord(state: AppState, letter: string) {
   const { guesses, currentWord } = state;
@@ -62,35 +62,23 @@ function updateTiles(state: AppState, guess: string) {
   const { success, secondaryBackground, warning } = styles.colors;
 
   for (let i = 0; i < WORD_LENGTH; i++) {
+    const tile = document.getElementById(`${guesses.length}:${i}`);
+    const key = document.getElementById(`key:${guess[i].toUpperCase()}`);
+    tile.style.color = styles.colors.primaryBackground
+
     if (guess[i] === target[i]) {
-      const tile = document.getElementById(`${guesses.length}:${i}`);
       tile.style.backgroundColor = success;
-      const key = document.getElementById(`key:${guess[i].toUpperCase()}`);
+      tile.style.borderColor = success;
       key.style.backgroundColor = success;
     } else if (target.includes(guess[i])) {
-      const tile = document.getElementById(`${guesses.length}:${i}`);
       tile.style.backgroundColor = warning;
-      const key = document.getElementById(`key:${guess[i].toUpperCase()}`);
+      tile.style.borderColor = warning
       key.style.backgroundColor = warning;
     } else {
-      const tile = document.getElementById(`${guesses.length}:${i}`);
       tile.style.backgroundColor = secondaryBackground;
-      const key = document.getElementById(`key:${guess[i].toUpperCase()}`);
+      tile.style.borderColor = secondaryBackground;
       key.style.backgroundColor = secondaryBackground;
     }
   }
 }
 
-function feedback(text: string, color: keyof Colors) {
-  const toast = document.getElementById(TOAST_ID);
-  toast.innerText = text;
-  toast.style.cssText = `
-        background-color: ${styles.colors[color]};
-        align-self: center;
-        padding: 1rem;
-        border-radius: 4px;
-        margin-bottom: 1.5rem;
-    `;
-
-  fadeOut(TOAST_ID, 0.05, 15);
-}

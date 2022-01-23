@@ -8,6 +8,7 @@ import { createKeyboard } from "./components/keyboard";
 import { createHeader } from "./components/header";
 import { isGameOver } from "./state/select";
 import { createLeaderBoard, overlay } from "./components/modal";
+import { createToast } from "./components/toast";
 
 const state: AppState = {
   target: pickRandomElement(FIVE_LETTER_TARGET_WORDS),
@@ -25,6 +26,7 @@ const createApp = () => {
   createHeader(root);
   createBoard(root);
   createKeyboard(root, state);
+  createToast(root)
 
   const modal = createLeaderBoard();
   overlay(root, modal, isGameOver(state));
