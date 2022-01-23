@@ -18,6 +18,7 @@ export function createLeaderBoard(state: AppState, onClose: () => void) {
   img.style.height = '2rem'
   img.style.width = '2rem'
   img.style.margin = '0.5rem'
+  img.style.cursor = 'pointer'
   img.onclick = () => onClose()
 
   toolbar.appendChild(img)

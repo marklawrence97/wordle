@@ -2,7 +2,6 @@
   "name": "wordle",
   "version": "1.0.0",
   "main": "index.js",
-  "types": "index.d.ts",
   "repository": "git@github.com:marklawrence97/wordle.git",
   "author": "Mark Lawrence",
   "license": "MIT",

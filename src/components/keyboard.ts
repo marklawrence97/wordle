@@ -26,6 +26,7 @@ export function createKeyboard(root: HTMLElement, state: AppState) {
             margin: 0.1rem;
             font-weight: bold;
             font-size: 1rem;
+            cursor: pointer;
         `;
     key.innerText = letter;
     key.id = `key:${letter}`;
