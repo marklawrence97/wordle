@@ -1,5 +1,4 @@
-import { GUESSES, TOAST_ID, WORD_LENGTH } from "../model";
-import { styles } from "../theme/style";
+import { GUESSES, WORD_LENGTH } from "../model";
 
 export function createBoard(root: HTMLElement) {
   const grid = document.createElement("div");

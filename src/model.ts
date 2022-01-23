@@ -16,3 +16,7 @@ export interface Colors {
   warning: string;
   cloud: string;
 }
+
+export interface Storage {
+  history: string;
+}

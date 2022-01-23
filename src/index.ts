@@ -28,7 +28,7 @@ const createApp = () => {
   createKeyboard(root, state);
   createToast(root)
 
-  const modal = createLeaderBoard();
+  const modal = createLeaderBoard(state, () => {overlay(root, modal, false)});
   overlay(root, modal, isGameOver(state));
 
   document.addEventListener("keydown", (e) => {
@@ -47,6 +47,7 @@ const createApp = () => {
     if (code === "Enter") {
       submit(state);
       setTimeout(() => {
+        const modal = createLeaderBoard(state, () => { overlay(root, modal, false)});
         overlay(root, modal, isGameOver(state));
       }, 1000);
     }
