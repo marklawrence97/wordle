@@ -10,17 +10,22 @@ export function createKeyboard(root: HTMLElement, state: AppState) {
     ["Z", "X", "C", "V", "B", "N", "M"],
   ];
   keyboard.style.cssText = `
-        display: flex;
+        display: block;
         flex-direction: column;
         align-items: center;
+        height: 200px;
     `;
 
   const createKey = (letter: string, onPress: () => void) => {
     const key = document.createElement("button");
     key.onclick = onPress;
     key.style.cssText = `
+            display: flex;
+            flex: 1;
+            height: 58px;
+            justify-content: center;
+            align-items: center;
             background-color: ${styles.colors.cloud};
-            padding: 1rem;
             border-radius: 4px;
             border: 0;
             margin: 0.1rem;
@@ -39,7 +44,7 @@ export function createKeyboard(root: HTMLElement, state: AppState) {
     const rowContainer = document.createElement("div");
     rowContainer.style.cssText = `
             display: flex;
-            flex-direction: row;  
+            width: 100%; 
         `;
 
     if (i === keys.length - 1) {

@@ -1,15 +1,23 @@
+<!DOCTYPE html>
 <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
     <style>
-          @keyframes slide-in {
-                from {
-                    transform: translateY(100%);
-                }
-                to {
-                    transform: translateY(0%);
-                }
+        @keyframes slide-in {
+            from {
+                transform: translateY(100%);
             }
+            to {
+                transform: translateY(0%);
+            }
+        }
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
     </style>
-    <body style="display: flex; justify-content: center; font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;">
+    <body style="font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;">
         <div id="root">
     </body>
     <script src="dist/main.js"></script>
