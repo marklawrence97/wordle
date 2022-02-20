@@ -22,6 +22,7 @@ const createApp = () => {
   root.style.cssText = `
         display: flex;
         flex-direction: column;
+
         height: 100%;
         width: 100%;
         margin: 0 auto;
@@ -30,12 +31,21 @@ const createApp = () => {
 
   const previousState = JSON.parse(localStorage.getItem("state"));
   const state = previousState || { ...appState };
-  console.warn(state);
 
   createHeader(root);
   createBoard(root, state);
-  createKeyboard(root, state);
   createToast(root);
+  createKeyboard(root, state);
+
+  for (let i = 0; i < state.guesses.length; i++) {
+    const previousState = {
+      ...state,
+      currentWord: state.guesses[i],
+      guesses: state.guesses.slice(0, i),
+    };
+
+    submit(previousState);
+  }
 
   const modal = createLeaderBoard(state, () => {
     overlay(root, modal, false);

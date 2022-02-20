@@ -2,7 +2,7 @@ import { AppState, GUESSES, WORD_LENGTH } from "../model";
 import { MAX_WIDTH } from "../theme/style";
 
 export function createBoard(root: HTMLElement, state: AppState): void {
-  const { guesses, target } = state;
+  const { guesses } = state;
 
   const board = document.createElement("div");
   board.style.cssText = `
@@ -10,6 +10,7 @@ export function createBoard(root: HTMLElement, state: AppState): void {
     justify-content: center;
     align-items: center;
     flex-grow: 1;
+    margin: 1rem 0rem;
   `;
 
   const grid = document.createElement("div");
@@ -30,12 +31,12 @@ export function createBoard(root: HTMLElement, state: AppState): void {
             grid-gap: 5px;
         `;
 
-    for (let j = 0; j < WORD_LENGTH; j++) {
-      let previousGuess = "";
-      if (guesses.length >= i) {
-        previousGuess = guesses[i] || "";
-      }
+    let previousGuess = "";
+    if (guesses.length >= i) {
+      previousGuess = guesses[i] || "";
+    }
 
+    for (let j = 0; j < WORD_LENGTH; j++) {
       const tile = document.createElement("div");
       tile.style.cssText = `
               display: flex;
@@ -46,9 +47,7 @@ export function createBoard(root: HTMLElement, state: AppState): void {
               font-weight: bold;
             `;
 
-      debugger;
-      console.warn(previousGuess.slice(j, j + 1));
-      tile.innerText = previousGuess.slice(j, j + 1);
+      tile.innerText = previousGuess.slice(j, j + 1).toUpperCase();
 
       tile.id = `${i}:${j}`;
       row.appendChild(tile);

@@ -31,8 +31,6 @@ export function backspace(state: AppState) {
 
 export function submit(state: AppState) {
   const { guesses, currentWord } = state;
-  window.localStorage.setItem("state", JSON.stringify(state));
-
 
   if (currentWord.length === WORD_LENGTH && guesses.length < GUESSES) {
     const lower = currentWord.toLowerCase();
@@ -45,6 +43,7 @@ export function submit(state: AppState) {
       updateTiles(state, lower);
       state.guesses.push(lower);
       state.currentWord = "";
+      window.localStorage.setItem("state", JSON.stringify(state));
       return;
     }
 
@@ -52,6 +51,7 @@ export function submit(state: AppState) {
       updateTiles(state, lower);
       state.guesses.push(lower);
       state.currentWord = "";
+      window.localStorage.setItem("state", JSON.stringify(state));
     } else {
       feedback("Not a word", "error");
     }
@@ -65,16 +65,17 @@ function updateTiles(state: AppState, guess: string) {
 
   for (let i = 0; i < WORD_LENGTH; i++) {
     const tile = document.getElementById(`${guesses.length}:${i}`);
+
     const key = document.getElementById(`key:${guess[i].toUpperCase()}`);
-    tile.style.color = styles.colors.primaryBackground
-    
+    tile.style.color = styles.colors.primaryBackground;
+
     if (guess[i] === target[i]) {
       tile.style.backgroundColor = success;
       tile.style.borderColor = success;
       key.style.backgroundColor = success;
     } else if (target.includes(guess[i])) {
       tile.style.backgroundColor = warning;
-      tile.style.borderColor = warning
+      tile.style.borderColor = warning;
       key.style.backgroundColor = warning;
     } else {
       tile.style.backgroundColor = secondaryBackground;
@@ -83,4 +84,3 @@ function updateTiles(state: AppState, guess: string) {
     }
   }
 }
-
