@@ -15,9 +15,10 @@ export function pickRandomElement(words: string[]): string {
 
   const today = new Date();
   const day = today.getDate();
+  const month = today.getMonth();
   const year = today.getFullYear();
 
-  const seed = parseInt(`${day}${year}`);
+  const seed = parseInt(`${day}${month}${year}`);
 
   const randomNumber = getPsuedoRandomNumber(seed);
 

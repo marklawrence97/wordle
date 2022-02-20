@@ -29,8 +29,10 @@ const createApp = () => {
         max-width: ${MAX_WIDTH};
     `;
 
-  const previousState = JSON.parse(localStorage.getItem("state"));
-  const state = previousState || { ...appState };
+  const previousState = JSON.parse(localStorage.getItem("state")) ?? {};
+
+  const state =
+    previousState?.target === appState.target ? previousState : appState;
 
   createHeader(root);
   createBoard(root, state);

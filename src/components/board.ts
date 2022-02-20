@@ -1,5 +1,4 @@
 import { AppState, GUESSES, WORD_LENGTH } from "../model";
-import { MAX_WIDTH } from "../theme/style";
 
 export function createBoard(root: HTMLElement, state: AppState): void {
   const { guesses } = state;
@@ -17,9 +16,9 @@ export function createBoard(root: HTMLElement, state: AppState): void {
   grid.style.cssText = `
         display: grid;
         grid-template-rows: repeat(${GUESSES}, 1fr);
-        height: 420px;
+        height: 350px;
         width: 100%;
-        max-width: ${MAX_WIDTH};
+        max-width: 300px;
         grid-gap: 5px;
     `;
 
