@@ -1,6 +1,6 @@
 import { AppState } from "../model";
 import { backspace, submit, updateWord } from "../state/update";
-import { styles } from "../theme/style";
+import { MAX_WIDTH, styles } from "../theme/style";
 
 export function createKeyboard(root: HTMLElement, state: AppState) {
   const keyboard = document.createElement("div");
@@ -14,6 +14,8 @@ export function createKeyboard(root: HTMLElement, state: AppState) {
         flex-direction: column;
         align-items: center;
         height: 200px;
+        width: 100%;
+        max-width: ${MAX_WIDTH};
     `;
 
   const createKey = (letter: string, onPress: () => void) => {

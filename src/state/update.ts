@@ -31,6 +31,8 @@ export function backspace(state: AppState) {
 
 export function submit(state: AppState) {
   const { guesses, currentWord } = state;
+  window.localStorage.setItem("state", JSON.stringify(state));
+
 
   if (currentWord.length === WORD_LENGTH && guesses.length < GUESSES) {
     const lower = currentWord.toLowerCase();
@@ -65,7 +67,7 @@ function updateTiles(state: AppState, guess: string) {
     const tile = document.getElementById(`${guesses.length}:${i}`);
     const key = document.getElementById(`key:${guess[i].toUpperCase()}`);
     tile.style.color = styles.colors.primaryBackground
-
+    
     if (guess[i] === target[i]) {
       tile.style.backgroundColor = success;
       tile.style.borderColor = success;

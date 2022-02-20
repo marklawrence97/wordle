@@ -1,20 +1,24 @@
-import { GUESSES, WORD_LENGTH } from "../model";
+import { AppState, GUESSES, WORD_LENGTH } from "../model";
+import { MAX_WIDTH } from "../theme/style";
 
-export function createBoard(root: HTMLElement) {
-  const board = document.createElement("div")
+export function createBoard(root: HTMLElement, state: AppState): void {
+  const { guesses, target } = state;
+
+  const board = document.createElement("div");
   board.style.cssText = `
     display: flex;
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-  `
+  `;
 
   const grid = document.createElement("div");
   grid.style.cssText = `
         display: grid;
         grid-template-rows: repeat(${GUESSES}, 1fr);
         height: 420px;
-        width: 350px;
+        width: 100%;
+        max-width: ${MAX_WIDTH};
         grid-gap: 5px;
     `;
 
@@ -27,6 +31,11 @@ export function createBoard(root: HTMLElement) {
         `;
 
     for (let j = 0; j < WORD_LENGTH; j++) {
+      let previousGuess = "";
+      if (guesses.length >= i) {
+        previousGuess = guesses[i] || "";
+      }
+
       const tile = document.createElement("div");
       tile.style.cssText = `
               display: flex;
@@ -37,6 +46,10 @@ export function createBoard(root: HTMLElement) {
               font-weight: bold;
             `;
 
+      debugger;
+      console.warn(previousGuess.slice(j, j + 1));
+      tile.innerText = previousGuess.slice(j, j + 1);
+
       tile.id = `${i}:${j}`;
       row.appendChild(tile);
     }
@@ -44,6 +57,6 @@ export function createBoard(root: HTMLElement) {
     grid.appendChild(row);
   }
 
-  board.appendChild(grid)
+  board.appendChild(grid);
   root.appendChild(board);
 }

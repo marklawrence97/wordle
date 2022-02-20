@@ -1,5 +1,7 @@
 import { Colors } from "../model";
 
+export const MAX_WIDTH = "350px";
+
 const colors: Colors = {
   primaryBackground: "white",
   success: "#6aaa64",

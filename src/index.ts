@@ -9,8 +9,9 @@ import { createHeader } from "./components/header";
 import { isGameOver } from "./state/select";
 import { createLeaderBoard, overlay } from "./components/modal";
 import { createToast } from "./components/toast";
+import { MAX_WIDTH } from "./theme/style";
 
-const state: AppState = {
+const appState: AppState = {
   target: pickRandomElement(FIVE_LETTER_TARGET_WORDS),
   currentWord: "",
   guesses: [],
@@ -24,14 +25,21 @@ const createApp = () => {
         height: 100%;
         width: 100%;
         margin: 0 auto;
-        max-width: 450px;
+        max-width: ${MAX_WIDTH};
     `;
-  createHeader(root);
-  createBoard(root);
-  createKeyboard(root, state);
-  createToast(root)
 
-  const modal = createLeaderBoard(state, () => {overlay(root, modal, false)});
+  const previousState = JSON.parse(localStorage.getItem("state"));
+  const state = previousState || { ...appState };
+  console.warn(state);
+
+  createHeader(root);
+  createBoard(root, state);
+  createKeyboard(root, state);
+  createToast(root);
+
+  const modal = createLeaderBoard(state, () => {
+    overlay(root, modal, false);
+  });
   overlay(root, modal, isGameOver(state));
 
   document.addEventListener("keydown", (e) => {
@@ -50,7 +58,9 @@ const createApp = () => {
     if (code === "Enter") {
       submit(state);
       setTimeout(() => {
-        const modal = createLeaderBoard(state, () => { overlay(root, modal, false)});
+        const modal = createLeaderBoard(state, () => {
+          overlay(root, modal, false);
+        });
         overlay(root, modal, isGameOver(state));
       }, 1000);
     }
